@@ -1,0 +1,189 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+
+
+ <filename>sinnka</filename>
+ 
+ <group>Flandre</group>
+
+ <title>虹符「真華幻想」</title>
+
+ <description>放射の直球です。弾に大きさの違いがあります。イメージとしては、『東方』の『霊夢』に『美鈴』を合わせた感じ。って分からないですね（汗）。
+ レベル上がるとちっこい弾が増えます。</description>
+
+ <capture>自機より前を見て早めに避ける。一応レベル５０が東方でいうハードあたりの予定です。</capture>
+
+
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+<actionRef label="Fire1"/>
+<actionRef label="Fire2"/>
+<actionRef label="Fire3"/>
+<actionRef label="Fire4"/>
+
+<wait>300</wait>
+</action>
+
+
+<action label="Fire1">
+<repeat><times>30</times><action>
+<fire>
+<direction type="absolute">0+$rand*360</direction>
+<speed>0.5+$rand*3</speed>
+<bulletRef label="Ring"><param>0+$rand*360</param><param>0.5+$rand*3</param></bulletRef>
+</fire>
+</action>
+</repeat>
+</action>
+
+
+<bullet label="Ring">
+<action>
+<fire>
+<direction type="absolute">0</direction>
+<speed>10</speed>
+<bulletRef label="Ring2"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+<repeat><times>20</times><action>
+<fire>
+<direction type="sequence">360/20</direction>
+<speed>10</speed>
+<bulletRef label="Ring2"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+
+
+<bullet label="Ring2">
+<action>
+<wait>1</wait>
+<fire>
+<direction type="absolute">$1</direction>
+<speed>$2</speed>
+<bullet/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+
+
+<action label="Fire2">
+<repeat><times>50+$rank*150</times><action>
+<fire>
+<direction type="absolute">0+$rand*360</direction>
+<speed>0.5+$rand*3</speed>
+<bulletRef label="blue"/>
+</fire>
+</action>
+</repeat>
+</action>
+
+
+<action label="Fire3">
+<repeat><times>50+$rank*150</times><action>
+<fire>
+<direction type="absolute">0+$rand*360</direction>
+<speed>0.5+$rand*3</speed>
+<bulletRef label="red"/>
+</fire>
+</action>
+</repeat>
+</action>
+
+
+<action label="Fire4">
+<repeat><times>20</times><action>
+<fire>
+<direction type="absolute">0+$rand*360</direction>
+<speed>0.5+$rand*3</speed>
+<bulletRef label="Ring3"><param>0+$rand*360</param><param>1+$rand*1.5</param></bulletRef>
+</fire>
+</action>
+</repeat>
+</action>
+
+
+<bullet label="Ring3">
+<action>
+<fire>
+<direction type="absolute">0</direction>
+<speed>10</speed>
+<bulletRef label="Ring4"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+<repeat><times>30</times><action>
+<fire>
+<direction type="sequence">360/30</direction>
+<speed>10</speed>
+<bulletRef label="Ring4"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+
+
+<bullet label="Ring4">
+<action>
+<wait>2</wait>
+<fire>
+<direction type="absolute">$1</direction>
+<speed>$2</speed>
+<bulletRef label="green"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+
+<bullet label="blue">
+<action>
+<fire>
+<direction type="relative">0</direction>
+<speed>0.5+$rand*3</speed>
+<bullet/>
+</fire>
+</action>
+</bullet>
+
+
+<bullet label="red">
+<action>
+<wait>1000</wait>
+<changeSpeed>
+<speed>10</speed>
+<term>0</term>
+</changeSpeed>
+</action>
+</bullet>
+
+
+<bullet label="green">
+<action>
+<wait>1000</wait>
+<fire>
+<direction type="aim">0</direction>
+<bullet/>
+</fire>
+</action>
+</bullet>
+
+
+
+</bulletml>
+
+</barrage>
+

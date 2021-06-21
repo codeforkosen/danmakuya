@@ -1,0 +1,224 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+
+
+ <filename>raiboru</filename>
+ 
+ <group>Flandre</group>
+
+ <title>雷符「ライトニング・ボルテックス」</title>
+
+ <description>１８WAYと１７WAYの交互撃ちに、ビットから稲妻らしきものが発射されます。レベルが上がるとWAYの発射間隔と稲妻の弾速が上がります。
+名前は某カードゲームの魔法カードの名前からとりました。</description>
+
+ <capture>なんだろう、安所にいるしか方法が・・・。レベル５０がハードかな？
+この弾幕はレベルとか関係ない気がする（汗）</capture>
+
+
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+<fire>
+<direction type="absolute">70</direction>
+<speed>2</speed>
+<bulletRef label="Bit1"/>
+</fire>
+<fire>
+<direction type="absolute">-70</direction>
+<speed>2</speed>
+<bulletRef label="Bit2"/>
+</fire>
+
+
+<repeat><times>10</times><action>
+<fire>
+<direction type="absolute">90</direction>
+<speed>1</speed>
+<bullet/>
+</fire>
+
+<repeat><times>18</times><action>
+<fire>
+<direction type="sequence">180/18</direction>
+<speed>1</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+
+<wait>20-$rank*10</wait>
+
+<fire>
+<direction type="sequence">-5</direction>
+<speed>1</speed>
+<bulletRef label="Blue"/>
+</fire>
+
+<repeat><times>17</times><action>
+<fire>
+<direction type="sequence">-180/18</direction>
+<speed>1</speed>
+<bulletRef label="Blue"/>
+</fire>
+</action>
+</repeat>
+
+<wait>20-$rank*10</wait>
+
+</action>
+</repeat>
+
+<wait>200</wait>
+
+</action>
+
+<bullet label="Blue">
+<action>
+<fire>
+<direction type="relative">0</direction>
+<bullet/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Bit1">
+<action>
+<wait>25</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>0</term>
+</changeSpeed>
+<wait>20</wait>
+
+<actionRef label="Fire1"><param>45</param></actionRef>
+<actionRef label="Fire1"><param>30</param></actionRef>
+<actionRef label="Fire1"><param>15</param></actionRef>
+<actionRef label="Fire1"><param>30</param></actionRef>
+<actionRef label="Fire1"><param>45</param></actionRef>
+
+<vanish/>
+</action>
+</bullet>
+
+
+<bullet label="Bit2">
+<action>
+<wait>25</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>0</term>
+</changeSpeed>
+<wait>20</wait>
+
+<actionRef label="Fire2"><param>-45</param></actionRef>
+<actionRef label="Fire2"><param>-30</param></actionRef>
+<actionRef label="Fire2"><param>-15</param></actionRef>
+<actionRef label="Fire2"><param>-30</param></actionRef>
+<actionRef label="Fire2"><param>-45</param></actionRef>
+
+<vanish/>
+</action>
+</bullet>
+
+
+<action label="Fire1">
+<fire>
+<direction type="aim">$1</direction>
+<speed>1+$rank*1</speed>
+<bulletRef label="Step1_1"/>
+</fire>
+<repeat><times>10</times><action>
+<wait>3</wait>
+<fire>
+<direction type="sequence">0</direction>
+<speed>1+$rank*1</speed>
+<bulletRef label="Step1_1"/>
+</fire>
+</action>
+</repeat>
+</action>
+
+
+<action label="Fire2">
+<fire>
+<direction type="aim">$1</direction>
+<speed>1+$rank*1</speed>
+<bulletRef label="Step2_1"/>
+</fire>
+<repeat><times>10</times><action>
+<wait>3</wait>
+<fire>
+<direction type="sequence">0</direction>
+<speed>1+$rank*1</speed>
+<bulletRef label="Step2_1"/>
+</fire>
+</action>
+</repeat>
+</action>
+
+
+<bullet label="Step1_1">
+<action>
+<wait>20</wait>
+<fire>
+<direction type="relative">-90</direction>
+<speed>1+$rank*1</speed>
+<bulletRef label="Step1_2"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+
+<bullet label="Step1_2">
+<action>
+<wait>20</wait>
+<fire>
+<direction type="relative">90</direction>
+<speed>1+$rank*1</speed>
+<bulletRef label="Step1_1"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+
+<bullet label="Step2_1">
+<action>
+<wait>20</wait>
+<fire>
+<direction type="relative">90</direction>
+<speed>1+$rank*1</speed>
+<bulletRef label="Step2_2"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+
+<bullet label="Step2_2">
+<action>
+<wait>20</wait>
+<fire>
+<direction type="relative">-90</direction>
+<speed>1+$rank*1</speed>
+<bulletRef label="Step2_1"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+
+</bulletml>
+
+</barrage>
+

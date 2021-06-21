@@ -1,0 +1,223 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>cranberry-trap</filename>
+	<group>Toho</group>
+	<title>東方紅魔郷より禁忌「クランベリートラップ」</title>
+	<description>東方紅魔郷のフランドール・スカーレットが使うスペル禁忌「クランベリートラップ」風。あまり似てません。これぐらいなら書けるだろうと思った事自体が間違っていました。</description>
+	<capture>「一発目の交点くらいまで上がって、その後下がりながら避けていく。隙間があったらまた上がるって感じ。」でさけられるそうです。</capture>
+</barrageInfo>
+
+<barrageStyles>
+	<!-- bulletml か lua が使えます。 -->
+	<bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+
+-- ------------------------------------  グローバル変数
+speed_ = 2
+flag = {}
+
+-- ------------------------------------  関数
+--[[
+function tableToStr(table) 
+	str = ""
+end
+
+function strToTable(str) 
+	list = {}
+	chars = ""
+	
+	for i = 1 , string.len(str) >= i , 1 do
+		c = sring.byte( str , i )
+		
+		if not(c == string.byte(" ")) then
+			chars = chars .. c
+		else
+			table.insert(list ,  chars)
+			chars = ""
+		end
+	end
+	table.insert(list ,  chars)
+	return list
+end
+]]
+
+-- 中央に弾を撃ちます
+function center( speed ) 
+	px = getMaxX()/2 - getX()
+	py = getMaxY()/2 - getY()
+	r = math.sqrt(px * px + py * py)
+
+	fire(px/r * speed , py/r * speed)
+end
+
+--自機に弾を撃ちます
+function aimLead( speed )
+	x = getPlayerX() - getX()
+	y = getPlayerY() - getY()
+	r = math.sqrt(x * x + y * y)
+
+	fire(x/r * speed , y/r * speed)
+end
+
+--0 3
+--1 2
+function setPosition(pos)
+	s = math.mod( pos,4)
+
+	if(s == 0) then
+		setPos(5 , 5)
+		setSpeed(0 , speed_)
+	elseif (s == 1) then
+		setPos(5 , getMaxY()-5)
+		setSpeed(speed_ , 0)
+	elseif (s == 2) then
+		setPos(getMaxX()-5 , getMaxY()-5)
+		setSpeed(0 , -speed_)
+	elseif (s == 3) then
+		setPos(getMaxX()-5 , 5)
+		setSpeed(-speed_ , 0)
+	end
+end
+
+--0 1
+--3 2
+function setPositionBack(pos)
+	s = math.mod( pos,4)
+
+	if(s == 0) then
+		setPos(5 , 5)
+		setSpeed(speed_ , 0)
+	elseif (s == 1) then
+		setPos(getMaxX()-5 , 5)
+		setSpeed(0 , speed_)
+	elseif (s == 2) then
+		setPos(getMaxX()-5 , getMaxY()-5)
+		setSpeed(-speed_ , 0)
+	elseif (s == 3) then
+		setPos(5 , getMaxY()-5)
+		setSpeed(0 , -speed_)
+	end
+end
+
+-- ------------------------------------  弾の定義
+
+function fixedBack(id)
+	turn = getTurn()
+	s = math.mod( id,4)
+	
+	if(turn == 0) then 
+		setPosition(id)
+	else
+		if( math.mod( turn , 7) == 0 ) then
+			center(speed_ /2)
+		end
+	end
+end
+
+function fixed(id)
+	turn = getTurn()
+	s = math.mod( id,4)
+	
+	if(turn == 0) then 
+		setPosition(id)
+	else
+		if( math.mod( turn , 7) == 0 ) then
+			center(speed_ /2)
+		end
+	end
+end
+
+function leadBack(id)
+	turn = getTurn()
+	s = math.mod( id,4)
+	
+	if(turn == 0) then 
+		setPositionBack(id)
+	else
+		if( math.mod( turn , 7) == 0 ) then
+			aimLead(speed_ /2)
+		end
+	end
+end
+
+function lead(id)
+	turn = getTurn()
+	s = math.mod( id,4)
+	
+	if(turn == 0) then 
+		setPosition(id)
+	else
+		if( math.mod( turn , 7) == 0 ) then
+			aimLead(speed_ /2)
+		end
+	end
+end
+
+-- ------------------------------------  トップ
+function top()
+	turn = getTurn()
+	sp = getMaxX() / speed_ 
+	count = 6
+	
+	if( turn < sp*2 ) then 
+		if( math.mod( turn , sp*3) == 0 ) then
+			fire(0, 0, "fixed" ,0)
+			fire(0, 0, "fixed" ,2)
+		elseif( math.mod( turn , sp*3) == sp * 1 ) then
+			fire(0, 0, "fixed" ,1)
+			fire(0, 0, "fixed" ,3)
+			fire(0, 0, "leadBack" ,1)
+			fire(0, 0, "leadBack" ,3)
+		elseif( math.mod( turn , sp*3) == sp * 2 ) then
+			fire(0, 0, "fixed" ,0)
+			fire(0, 0, "fixed" ,2)
+			fire(0, 0, "leadBack" ,0)
+			fire(0, 0, "leadBack" ,2)
+		end
+	else
+		if( math.mod( turn , sp*count)/sp  == 0 ) then
+			fire(0, 0, "fixed" ,0)
+			fire(0, 0, "fixed" ,2)
+			fire(0, 0, "fixedBack" ,1)
+			fire(0, 0, "fixedBack" ,3)
+		elseif( math.mod( turn , sp*count)/sp  == 1 ) then
+			fire(0, 0, "lead" ,0)
+			fire(0, 0, "lead" ,2)
+			fire(0, 0, "leadBack" ,1)
+			fire(0, 0, "leadBack" ,3)
+		elseif( math.mod( turn , sp*count)/sp  == 2 ) then
+			fire(0, 0, "fixed" ,0)
+			fire(0, 0, "fixed" ,2)
+			fire(0, 0, "fixedBack" ,1)
+			fire(0, 0, "fixedBack" ,3)
+		elseif( math.mod( turn , sp*count)/sp  == 3 ) then
+			fire(0, 0, "fixed" ,1)
+			fire(0, 0, "fixed" ,3)
+			fire(0, 0, "leadBack" ,1)
+			fire(0, 0, "leadBack" ,3)
+		elseif( math.mod( turn , sp*count)/sp  == 4 ) then
+			fire(0, 0, "fixed" ,0)
+			fire(0, 0, "fixed" ,2)
+			fire(0, 0, "leadBack" ,0)
+			fire(0, 0, "leadBack" ,2)
+		elseif( math.mod( turn , sp*count)/sp  == 5 ) then
+			fire(0, 0, "fixed" ,1)
+			fire(0, 0, "fixed" ,3)
+			fire(0, 0, "fixedBack" ,1)
+			fire(0, 0, "fixedBack" ,3)
+		end
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+
+
+ <filename>souru</filename>
+ 
+ <group>Flandre</group>
+
+ <title>霊符「ソウル・クラッシュ・ホール」</title>
+
+ <description>画面上の方に行ってください。詰みます（笑）。要は狭い範囲でのWAY避けです。
+ 弾幕の形状から『東方』の『紫』を、綺麗さ（？）から『幽々子』を連想してもらえれば幸いです。
+ レベル上がると発射間隔が短くなります。</description>
+
+ <capture>とりあえず円に入って。あとはよく見て気合い避け。
+ レベル０が東方でいう『ノーマル』仕様です。たぶんｗｗｗ</capture>
+
+
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<changeDirection>
+<direction type="absolute">0</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>1</speed>
+<term>30</term>
+</changeSpeed>
+<wait>30</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>30</term>
+</changeSpeed>
+<wait>30</wait>
+<repeat><times>18</times><action>
+<fire>
+<direction type="absolute">90</direction>
+<speed>2</speed>
+<bulletRef label="Bit"/>
+</fire>
+<wait>10</wait>
+</action>
+</repeat>
+
+<wait>20</wait>
+
+<changeDirection>
+<direction type="absolute">180</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>2</speed>
+<term>40</term>
+</changeSpeed>
+<wait>40</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>20</term>
+</changeSpeed>
+<wait>20</wait>
+
+<wait>60</wait>
+
+<repeat><times>25+$rank*25</times><action>
+<fire>
+<direction type="absolute">0+$rand*360</direction>
+<speed>0.5</speed>
+<bulletRef label="Vanish"/>
+</fire>
+<repeat><times>20</times><action>
+<fire>
+<direction type="sequence">360/20</direction>
+<speed>0.5</speed>
+<bulletRef label="Vanish"/>
+</fire>
+</action>
+</repeat>
+
+<wait>30-$rank*15</wait>
+
+<fire>
+<direction type="absolute">0+$rand*360</direction>
+<speed>0.5</speed>
+<bulletRef label="Vanish1"/>
+</fire>
+<repeat><times>20</times><action>
+<fire>
+<direction type="sequence">360/20</direction>
+<speed>0.5</speed>
+<bulletRef label="Vanish1"/>
+</fire>
+</action>
+</repeat>
+
+<wait>30-$rank*15</wait>
+
+</action>
+</repeat>
+
+<wait>200</wait>
+</action>
+
+
+<bullet label="Bit">
+<action>
+<actionRef label="turn"/>
+
+</action>
+</bullet>
+
+
+<action label="turn">
+<repeat><times>10</times><action>
+<changeDirection>
+<direction type="relative">179</direction>
+<term>90</term>
+</changeDirection>
+
+<actionRef label="Fire"/>
+
+<changeDirection>
+<direction type="relative">179</direction>
+<term>90</term>
+</changeDirection>
+
+<actionRef label="Fire"/>
+
+</action>
+</repeat>
+</action>
+
+
+<action label="Fire">
+<fire>
+<direction type="relative">-90</direction>
+<speed>2</speed>
+<bullet/>
+</fire>
+<repeat><times>90</times><action>
+<wait>1</wait>
+<fire>
+<direction type="relative">-90</direction>
+<speed>2</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+</action>
+
+
+<bullet label="Vanish">
+<action>
+<wait>120</wait>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Vanish1">
+<action>
+<wait>120</wait>
+<vanish/>
+<wait>1000</wait>
+<fire>
+<direction type="aim">0</direction>
+<bullet/>
+</fire>
+</action>
+</bullet>
+
+
+</bulletml>
+
+</barrage>
+

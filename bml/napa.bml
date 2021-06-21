@@ -1,0 +1,394 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+
+
+ <filename>napa</filename>
+ 
+ <group>Flandre</group>
+
+ <title>爆符「ナパーム・デス」</title>
+
+ <description>大円、小円、ばら撒きを3WAY、4WAYで撃ってきます。某格闘ゲームの一撃必殺技をイメージして作りましたが残念な結果に（笑）
+ レベル上がると大円が大きくなり、小円とばら撒きの量が増えます。</description>
+
+ <capture>一応敵の両サイドが安置ですが・・・そこに行ける力があるなら下で避けましょうｗ
+ レベル５０が東方で言うノーマルで、１００がハードあたりかな？どことなくレミリアのある技に似て・・・ないかｗｗｗ</capture>
+
+
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+<actionRef label="oodama1"/>
+<actionRef label="kodama1"/>
+<actionRef label="baramaki1"/>
+<actionRef label="bakuhuu"/>
+<wait>60</wait>
+<actionRef label="oodama2"/>
+<actionRef label="kodama2"/>
+<actionRef label="baramaki2"/>
+<actionRef label="bakuhuu"/>
+<wait>60</wait>
+<actionRef label="oodama1"/>
+<actionRef label="kodama1"/>
+<actionRef label="baramaki1"/>
+<actionRef label="bakuhuu"/>
+<wait>60</wait>
+<actionRef label="oodama2"/>
+<actionRef label="kodama2"/>
+<actionRef label="baramaki2"/>
+<actionRef label="bakuhuu"/>
+
+<wait>300</wait>
+
+</action>
+
+
+<action label="oodama1">
+
+<fire>
+<direction type="aim">-30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>150</param><param>60</param><param>20+$rank*10</param><param>5</param></bulletRef>
+</fire>
+
+<fire>
+<direction type="sequence">30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>180</param><param>60</param><param>20+$rank*10</param><param>5</param></bulletRef>
+</fire>
+
+<fire>
+<direction type="sequence">30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>210</param><param>60</param><param>20+$rank*10</param><param>5</param></bulletRef>
+</fire>
+
+</action>
+
+
+<action label="oodama2">
+<fire>
+<direction type="aim">-45</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>180-45</param><param>60</param><param>20+$rank*10</param><param>5</param></bulletRef>
+</fire>
+
+<fire>
+<direction type="sequence">30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>180-15</param><param>60</param><param>20+$rank*10</param><param>5</param></bulletRef>
+</fire>
+
+<fire>
+<direction type="sequence">30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>180+15</param><param>60</param><param>20+$rank*10</param><param>5</param></bulletRef>
+</fire>
+
+<fire>
+<direction type="sequence">30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>180+45</param><param>60</param><param>20+$rank*10</param><param>5</param></bulletRef>
+</fire>
+
+</action>
+
+
+<action label="kodama1">
+
+<fire>
+<direction type="aim">-30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(150-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+<repeat><times>3+$rank*3</times><action>
+<fire>
+<direction type="sequence">-15+$rand*30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(150-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="aim">0</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+<repeat><times>3+$rank*3</times><action>
+<fire>
+<direction type="sequence">-15+$rand*30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="aim">30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(210-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+<repeat><times>3+$rank*3</times><action>
+<fire>
+<direction type="sequence">-15+$rand*30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(210-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+</action>
+
+
+<action label="kodama2">
+
+<fire>
+<direction type="aim">-45</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180-45-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+<repeat><times>3+$rank*3</times><action>
+<fire>
+<direction type="sequence">-15+$rand*30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180-45-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="aim">-15</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180-15-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+<repeat><times>3+$rank*3</times><action>
+<fire>
+<direction type="sequence">-15+$rand*30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180-15-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="aim">15</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180+15-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+<repeat><times>3+$rank*3</times><action>
+<fire>
+<direction type="sequence">-15+$rand*30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180+15-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="aim">45</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180+45-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+<repeat><times>3+$rank*3</times><action>
+<fire>
+<direction type="sequence">-15+$rand*30</direction>
+<speed>1</speed>
+<bulletRef label="Ring"><param>(180+45-10)+$rand*20</param><param>10</param><param>5</param><param>0.5+$rand*2.5</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+</action>
+
+
+<action label="baramaki1">
+
+<fire>
+<direction type="absolute">180-30</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+<repeat><times>5+$rank*5</times><action>
+<fire>
+<direction type="sequence">-8+$rand*16</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="absolute">180</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+<repeat><times>5+$rank*5</times><action>
+<fire>
+<direction type="sequence">-8+$rand*16</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="absolute">180+30</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+<repeat><times>5+$rank*5</times><action>
+<fire>
+<direction type="sequence">-8+$rand*16</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+
+</action>
+
+
+<action label="baramaki2">
+
+<fire>
+<direction type="absolute">180-45</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+<repeat><times>5+$rank*5</times><action>
+<fire>
+<direction type="sequence">-8+$rand*16</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="absolute">180-15</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+<repeat><times>5+$rank*5</times><action>
+<fire>
+<direction type="sequence">-8+$rand*16</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="absolute">180+15</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+<repeat><times>5+$rank*5</times><action>
+<fire>
+<direction type="sequence">-8+$rand*16</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="absolute">180+45</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+<repeat><times>5+$rank*5</times><action>
+<fire>
+<direction type="sequence">-8+$rand*16</direction>
+<speed>1+$rand*2</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+
+</action>
+
+
+<action label="bakuhuu">
+<repeat><times>100</times><action>
+<fire>
+<direction type="absolute">-60+$rand*120</direction>
+<speed>2+$rand*2</speed>
+<bulletRef label="red"/>
+</fire>
+</action>
+</repeat>
+</action>
+
+
+<bullet label="Ring">
+<action>
+<fire>
+<direction type="aim">0</direction>
+<speed>$3</speed>
+<bulletRef label="Ring1"><param>$1</param><param>$4</param></bulletRef>
+</fire>
+<repeat><times>$2</times><action>
+<fire>
+<direction type="sequence">360/$2</direction>
+<speed>$3</speed>
+<bulletRef label="Ring1"><param>$1</param><param>$4</param></bulletRef>
+</fire>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+
+
+<bullet label="Ring1">
+<action>
+<wait>1</wait>
+<fire>
+<direction type="absolute">$1</direction>
+<speed>$2</speed>
+<bulletRef label="green"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="green">
+<action>
+<changeSpeed>
+<speed>3</speed>
+<term>30</term>
+</changeSpeed>
+<wait>9000</wait>
+<fire>
+<direction/>
+<bullet/>
+</fire>
+</action>
+</bullet>
+
+
+<bullet label="red">
+<action>
+<wait>3000</wait>
+<changeSpeed>
+<speed>3</speed>
+<term>30</term>
+</changeSpeed>
+</action>
+</bullet>
+
+
+</bulletml>
+
+</barrage>
+

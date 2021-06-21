@@ -1,0 +1,233 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+
+
+ <filename>huuun</filename>
+ 
+ <group>Flandre</group>
+
+ <title>風符「風雲の叫び」</title>
+
+ <description>放たれた弾が爆発します。決して真中にいないように（汗）。
+この弾幕にはレベルはありません。レベルを変えると弾幕の形が変化してきれいです。
+まぁ、０が一番鋭角に入ってくるので難しいかな？</description>
+
+ <capture>とりあえず、鑑賞用に分類されるので、攻略というか、クリアできるかどうかを考えて作ってはいません（笑）。
+唯一攻略と言えば、画面下隅の方が広いかな？</capture>
+
+
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<fire>
+<direction type="absolute">180</direction>
+<speed>2</speed>
+<bulletRef label="Bom"><param>1</param></bulletRef>
+</fire>
+<fire>
+<direction type="absolute">180</direction>
+<speed>2</speed>
+<bulletRef label="Bom"><param>-1</param></bulletRef>
+</fire>
+<wait>400</wait>
+</action>
+
+<bullet label="Bom">
+<action>
+<wait>25</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>0</term>
+</changeSpeed>
+<wait>50</wait>
+
+<fire>
+<direction type="absolute">0</direction>
+<speed>0.5</speed>
+<bulletRef label="Fire1"><param>$1</param><param>0+$rank*50</param></bulletRef>
+</fire>
+<repeat><times>20</times><action>
+<fire>
+<direction type="sequence">360/20</direction>
+<speed>0.5</speed>
+<bulletRef label="Fire1"><param>$1</param><param>0+$rank*50</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="absolute">0</direction>
+<speed>0.5</speed>
+<bulletRef label="Fire2"><param>$1</param><param>0+$rank*50</param></bulletRef>
+</fire>
+<repeat><times>15</times><action>
+<fire>
+<direction type="sequence">360/15</direction>
+<speed>0.5</speed>
+<bulletRef label="Fire2"><param>$1</param><param>0+$rank*50</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+<fire>
+<direction type="absolute">0</direction>
+<speed>0.5</speed>
+<bulletRef label="Fire3"><param>$1</param><param>0+$rank*50</param></bulletRef>
+</fire>
+<repeat><times>10</times><action>
+<fire>
+<direction type="sequence">360/10</direction>
+<speed>0.5</speed>
+<bulletRef label="Fire3"><param>$1</param><param>0+$rank*50</param></bulletRef>
+</fire>
+</action>
+</repeat>
+
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Fire1">
+<action>
+<changeSpeed>
+<speed>5</speed>
+<term>30</term>
+</changeSpeed>
+<wait>30</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>0</term>
+</changeSpeed>
+
+<wait>30</wait>
+<fire>
+<direction type="relative">(110+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Blue"/>
+</fire>
+<fire>
+<direction type="relative">(120+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Blue"/>
+</fire>
+<fire>
+<direction type="relative">(130+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Blue"/>
+</fire>
+
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Fire2">
+<action>
+<changeSpeed>
+<speed>5</speed>
+<term>20</term>
+</changeSpeed>
+<wait>20</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>0</term>
+</changeSpeed>
+
+<wait>40</wait>
+<fire>
+<direction type="relative">(110+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Green"/>
+</fire>
+<fire>
+<direction type="relative">(120+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Green"/>
+</fire>
+<fire>
+<direction type="relative">(130+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Green"/>
+</fire>
+
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Fire3">
+<action>
+<changeSpeed>
+<speed>5</speed>
+<term>10</term>
+</changeSpeed>
+<wait>10</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>0</term>
+</changeSpeed>
+
+<wait>50</wait>
+<fire>
+<direction type="relative">(110+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Red"/>
+</fire>
+<fire>
+<direction type="relative">(120+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Red"/>
+</fire>
+<fire>
+<direction type="relative">(130+$2)*$1</direction>
+<speed>1</speed>
+<bulletRef label="Red"/>
+</fire>
+
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Blue">
+<action>
+<fire>
+<direction type="relative">0</direction>
+<speed>1</speed>
+<bullet/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Green">
+<action>
+<wait>1000</wait>
+<fire>
+<direction type="relative">0</direction>
+<speed>1</speed>
+<bullet/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Red">
+<action>
+<wait>1000</wait>
+<changeSpeed>
+<speed>2</speed>
+<term>0</term>
+</changeSpeed>
+</action>
+</bullet>
+
+
+</bulletml>
+
+</barrage>
+

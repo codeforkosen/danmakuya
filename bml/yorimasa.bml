@@ -1,0 +1,212 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>yorimasa</filename>
+	<group>Toho</group>
+	<title>恨弓「源三位頼政の弓」風</title>
+	<description>レーザー過多のCPUキラー。再現になってない。</description>
+	<capture>スペシャルONで。素敵な発狂が見られます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>3</times>
+  <action>
+   <fire>
+    <bulletRef label="bow">
+     <param>1</param>
+    </bulletRef>
+   </fire>
+   <fire>
+    <bulletRef label="bow">
+     <param>-1</param>
+    </bulletRef>
+   </fire>
+  </action>
+ </repeat>
+ <wait>90</wait>
+ <repeat><times>2+$rank*3</times>
+  <action>
+   <wait>75-$rank*45</wait>
+   <fire>
+    <direction type="absolute">-57</direction>
+    <bulletRef label="lasercannon">
+     <param>1</param>
+    </bulletRef>
+   </fire>
+   <wait>75-$rank*45</wait>
+   <fire>
+    <direction type="absolute">57</direction>
+    <bulletRef label="lasercannon">
+     <param>-1</param>
+    </bulletRef>
+   </fire>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="bow">
+ <direction type="absolute">0</direction>
+ <speed>0.001</speed>
+ <action>
+  <changeDirection>
+   <direction type="absolute">70*$1</direction>
+   <term>180</term>
+  </changeDirection>
+  <wait>$rand*20</wait>
+  <repeat><times>9</times>
+   <action>
+    <wait>5</wait>
+    <fire>
+     <direction type="relative">-40+$rand*80</direction>
+     <bulletRef label="arrow"/>
+    </fire>
+    <repeat><times>15</times>
+     <action>
+      <wait>1</wait>
+      <fire>
+       <direction type="sequence">0</direction>
+       <bulletRef label="arrow"/>
+      </fire>
+     </action>
+    </repeat>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="arrow">
+ <speed>2.4</speed>
+ <action/>
+</bullet>
+
+
+<bullet label="lasercannon">
+ <speed>105</speed>
+ <action>
+  <changeSpeed>
+   <speed>3.2</speed>
+   <term>0</term>
+  </changeSpeed>
+  <changeDirection>
+   <direction type="absolute">90*$1</direction>
+   <term>0</term>
+  </changeDirection>
+  <wait>1+$rand*3</wait>
+  <fire>
+   <direction type="absolute">180*$1</direction>
+   <speed>0.2</speed>
+   <bulletRef label="remain"/>
+  </fire>
+  <actionRef label="laser"/>
+  <repeat><times>20</times>
+   <action>
+    <wait>3</wait>
+    <fire>
+     <direction type="sequence">-3*$1</direction>
+     <speed>0.2</speed>
+     <bulletRef label="remain"/>
+    </fire>
+    <actionRef label="laser"/>
+   </action>
+  </repeat>
+ </action>
+</bullet>
+
+<bullet label="laser">
+ <action>
+  <wait>35</wait>
+  <changeSpeed>
+   <speed>1.6</speed>
+   <term>0</term>
+  </changeSpeed>
+  <wait>15+$rand*6</wait>
+  <vanish/>
+ </action>
+</bullet>
+
+<action label="laser">
+ <repeat><times>3</times>
+  <action>
+   <fire>
+    <direction type="sequence">0</direction>
+    <speed type="sequence">0.4</speed>
+    <bulletRef label="remain"/>
+   </fire>
+  </action>
+ </repeat>
+ <fire>
+  <direction type="sequence">0</direction>
+  <speed>0.001</speed>
+  <bulletRef label="laser"/>
+ </fire>
+ <repeat><times>20</times>
+  <action>
+   <fire>
+    <direction type="sequence">0</direction>
+    <speed type="sequence">0.08</speed>
+    <bulletRef label="laser"/>
+   </fire>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="remain">
+ <action>
+  <wait>35</wait>
+  <changeSpeed>
+   <speed>1.6</speed>
+   <term>0</term>
+  </changeSpeed>
+  <wait>15</wait>
+  <actionRef label="remain">
+   <param>-2-$rank*4+$rand*(4+$rank*8)</param>
+   <param>1-$rank*0.4+$rand*(0.1+$rank*0.8)</param>
+  </actionRef>
+  <vanish/>
+ </action>
+</bullet>
+
+<action label="remain">
+ <fire>
+  <direction type="relative">$1</direction>
+  <speed>0.001</speed>
+  <bulletRef label="rice">
+   <param>$2</param>
+  </bulletRef>
+ </fire>
+ <fire>
+  <direction type="relative">$1</direction>
+  <speed>2</speed>
+  <bulletRef label="rice">
+   <param>$2</param>
+  </bulletRef>
+ </fire>
+ <fire>
+  <direction type="relative">$1</direction>
+  <speed>4</speed>
+  <bulletRef label="rice">
+   <param>$2</param>
+  </bulletRef>
+ </fire>
+</action>
+
+<bullet label="rice">
+ <action>
+  <changeSpeed>
+   <speed>$1</speed>
+   <term>0</term>
+  </changeSpeed>
+ </action>
+</bullet>
+
+</barrage>

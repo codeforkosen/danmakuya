@@ -1,0 +1,316 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+
+
+ <filename>kueiku</filename>
+ 
+ <group>Flandre</group>
+
+ <title>震符「天覇爆砕」</title>
+
+ <description>敵が画面端に突進して、弾を出してきます。力あふれる『東方』の『萃香』のような弾幕を表現してみました。
+レベル上がると、発射間隔、弾速のバラつきが少なくなり、弾の量が増えます。</description>
+
+ <capture>隙間を見て避けるしかないですね。レベル上がると『運』要素も絡んできます。レベル５０あたりが東方で言う『ハード』あたりですね。</capture>
+
+
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+<!--　敵移動←　-->
+<changeDirection>
+<direction type="absolute">-90</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>6</speed>
+<term>10</term>
+</changeSpeed>
+<wait>20</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>0</term>
+</changeSpeed>
+
+<!--　発砲　-->
+<actionRef label="Fire"><param>0+20</param></actionRef>
+<wait>120-$rank*40</wait>
+
+<!--　敵移動→　-->
+<changeDirection>
+<direction type="absolute">90</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>6</speed>
+<term>10</term>
+</changeSpeed>
+<wait>37</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>0</term>
+</changeSpeed>
+
+<!--　発砲　-->
+<actionRef label="Fire"><param>180+20</param></actionRef>
+<wait>120-$rank*40</wait>
+
+<!--　敵移動↑　-->
+<changeDirection>
+<direction type="absolute">-60</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>6</speed>
+<term>10</term>
+</changeSpeed>
+<wait>22</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>0</term>
+</changeSpeed>
+
+<!--　発砲　-->
+<actionRef label="Fire"><param>90+20</param></actionRef>
+<wait>120-$rank*40</wait>
+
+<!--　敵移動↓　-->
+<changeDirection>
+<direction type="absolute">180</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>8</speed>
+<term>15</term>
+</changeSpeed>
+<wait>40</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>0</term>
+</changeSpeed>
+
+<!--　発砲　-->
+<actionRef label="Fire"><param>-90+20</param></actionRef>
+<wait>120-$rank*40</wait>
+
+<wait>200</wait>
+
+</action>
+
+
+<!--　土台　-->
+<action label="Fire">
+
+<fire>
+<direction type="absolute">$1+$rand*(180-40)</direction>
+<speed>1+$rand*1.5</speed>
+<bulletRef label="Step1"><param>$1+$rand*180</param><param>(0.5+$rank*0.5)+$rand*(1-$rank*1)</param></bulletRef>
+</fire>
+
+<repeat><times>6+$rank*4</times><action>
+ 
+ <fire>
+ <direction type="absolute">$1+$rand*(180-40)</direction>
+ <speed>1+$rand*1.5</speed>
+ <bulletRef label="Step1"><param>$1+$rand*180</param><param>(0.5+$rank*0.5)+$rand*(1-$rank*1)</param></bulletRef>
+ </fire>
+ 
+ <fire>
+ <direction type="absolute">$1+$rand*(180-40)</direction>
+ <speed>1+$rand*1.5</speed>
+ <bulletRef label="Step2"><param>$1+$rand*180</param><param>(0.5+$rank*0.5)+$rand*(1-$rank*1)</param></bulletRef>
+ </fire>
+ 
+ <fire>
+ <direction type="absolute">$1+$rand*(180-40)</direction>
+ <speed>1+$rand*1.5</speed>
+ <bulletRef label="Step3"><param>$1+$rand*180</param><param>(0.5+$rank*0.5)+$rand*(1-$rank*1)</param></bulletRef>
+ </fire>
+ 
+ <fire>
+ <direction type="absolute">$1+$rand*(180-40)</direction>
+ <speed>1+$rand*1.5</speed>
+ <bulletRef label="Step4"><param>$1+$rand*180</param><param>(0.5+$rank*0.5)+$rand*(1-$rank*1)</param></bulletRef>
+ </fire>
+
+</action>
+</repeat>
+</action>
+
+<!--　輪を作る1　-->
+<bullet label="Step1">
+<action>
+<wait>25</wait>
+<fire>
+<direction type="absolute">0</direction>
+<speed>10</speed>
+<bulletRef label="Ring1"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+<repeat><times>20</times><action>
+<fire>
+<direction type="sequence">360/20</direction>
+<speed>10</speed>
+<bulletRef label="Ring1"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+
+<!--　輪を作る2　-->
+<bullet label="Step2">
+<action>
+<wait>25</wait>
+<fire>
+<direction type="absolute">0</direction>
+<speed>10</speed>
+<bulletRef label="Ring2"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+<repeat><times>20</times><action>
+<fire>
+<direction type="sequence">360/20</direction>
+<speed>10</speed>
+<bulletRef label="Ring2"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+
+<!--　輪を作る3　-->
+<bullet label="Step3">
+<action>
+<wait>25</wait>
+<fire>
+<direction type="absolute">0</direction>
+<speed>10</speed>
+<bulletRef label="Ring3"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+<repeat><times>20</times><action>
+<fire>
+<direction type="sequence">360/20</direction>
+<speed>10</speed>
+<bulletRef label="Ring3"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+
+<!--　輪を作る4　-->
+<bullet label="Step4">
+<action>
+<wait>25</wait>
+<fire>
+<direction type="absolute">0</direction>
+<speed>10</speed>
+<bulletRef label="Ring4"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+<repeat><times>20</times><action>
+<fire>
+<direction type="sequence">360/20</direction>
+<speed>10</speed>
+<bulletRef label="Ring4"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+
+<!--　輪を発砲1　-->
+<bullet label="Ring1">
+<action>
+<wait>1</wait>
+<fire>
+<direction type="absolute">$1</direction>
+<speed>$2</speed>
+<bullet/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<!--　輪を発砲2　-->
+<bullet label="Ring2">
+<action>
+<wait>1</wait>
+<fire>
+<direction type="absolute">$1</direction>
+<speed>$2</speed>
+<bulletRef label="red"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<!--　輪を発砲3　-->
+<bullet label="Ring3">
+<action>
+<wait>1</wait>
+<fire>
+<direction type="absolute">$1</direction>
+<speed>$2</speed>
+<bulletRef label="green"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<!--　輪を発砲4　-->
+<bullet label="Ring4">
+<action>
+<wait>1</wait>
+<fire>
+<direction type="absolute">$1</direction>
+<speed>$2</speed>
+<bulletRef label="blue"/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="red">
+<action>
+<wait>1000</wait>
+<changeSpeed>
+<speed>10</speed>
+<term>0</term>
+</changeSpeed>
+</action>
+</bullet>
+
+<bullet label="green">
+<action>
+<wait>1000</wait>
+<fire>
+<direction type="aim">0</direction>
+<bullet/>
+</fire>
+</action>
+</bullet>
+
+<bullet label="blue">
+<action>
+<fire>
+<direction type="relative">0</direction>
+<bullet/>
+</fire>
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>
+

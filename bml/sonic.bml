@@ -1,0 +1,194 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+
+
+ <filename>sonic</filename>
+ 
+ <group>Flandre</group>
+
+ <title>音符「アグレッシブ・ソニック」</title>
+
+ <description>多重WAYを移動しながら撃ってきます。レベル上がるとWAYの本数が増えます。</description>
+
+ <capture>上に逃げたらゆとりシューターですよ（笑）。少し先を見て道を見つけておかないと、最後のWAYが詰みます。まぁ『運』要素がぎっしりですが・・・。</capture>
+
+
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top1">
+
+<actionRef label="Fire"/>
+<wait>26</wait>
+<actionRef label="Fire"/>
+<wait>26</wait>
+<actionRef label="Fire"/>
+<wait>26</wait>
+<actionRef label="Fire"/>
+</action>
+
+
+<action label="top">
+
+<changeDirection>
+<direction type="absolute">70</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>2</speed>
+<term>20</term>
+</changeSpeed>
+<wait>30</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>20</term>
+</changeSpeed>
+<wait>30</wait>
+
+<changeDirection>
+<direction type="absolute">-70</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>2</speed>
+<term>20</term>
+</changeSpeed>
+<wait>30</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>20</term>
+</changeSpeed>
+<wait>30</wait>
+
+<changeDirection>
+<direction type="absolute">-110</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>2</speed>
+<term>20</term>
+</changeSpeed>
+<wait>30</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>20</term>
+</changeSpeed>
+<wait>30</wait>
+
+<changeDirection>
+<direction type="absolute">110</direction>
+<term>0</term>
+</changeDirection>
+<changeSpeed>
+<speed>2</speed>
+<term>20</term>
+</changeSpeed>
+<wait>30</wait>
+<changeSpeed>
+<speed>0.0001</speed>
+<term>20</term>
+</changeSpeed>
+<wait>200</wait>
+
+</action>
+
+
+<action label="Fire">
+<repeat><times>3</times><action>
+<fire>
+<direction type="absolute">90</direction>
+<speed>1.5</speed>
+<bullet/>
+</fire>
+<actionRef label="Fire1"><param>(10+$rank*10)+$rand*(5+$rank*5)</param></actionRef>
+<wait>4</wait>
+<actionRef label="Fire2"><param>(10+$rank*10)+$rand*(5+$rank*5)</param></actionRef>
+<wait>4</wait>
+<actionRef label="Fire3"><param>(10+$rank*10)+$rand*(5+$rank*5)</param></actionRef>
+<wait>4</wait>
+</action>
+</repeat>
+</action>
+
+
+<action label="Fire1">
+<fire>
+<direction type="absolute">90</direction>
+<speed>1.5</speed>
+<bullet/>
+</fire>
+<repeat><times>$1</times><action>
+<fire>
+<direction type="sequence">180/$1</direction>
+<speed>1.5</speed>
+<bullet/>
+</fire>
+</action>
+</repeat>
+</action>
+
+<action label="Fire2">
+<fire>
+<direction type="absolute">90</direction>
+<speed>1.5</speed>
+<bulletRef label="Blue"/>
+</fire>
+<repeat><times>$1</times><action>
+<fire>
+<direction type="sequence">180/$1</direction>
+<speed>1.5</speed>
+<bulletRef label="Blue"/>
+</fire>
+</action>
+</repeat>
+</action>
+
+<action label="Fire3">
+<fire>
+<direction type="absolute">90</direction>
+<speed>1.5</speed>
+<bulletRef label="Green"/>
+</fire>
+<repeat><times>$1</times><action>
+<fire>
+<direction type="sequence">180/$1</direction>
+<speed>1.5</speed>
+<bulletRef label="Green"/>
+</fire>
+</action>
+</repeat>
+</action>
+
+<bullet label="Blue">
+<action>
+<fire>
+<direction type="relative">0</direction>
+<speed>1.5</speed>
+<bullet/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="Green">
+<action>
+<wait>1000</wait>
+<fire>
+<direction type="relative">0</direction>
+<speed>1.5</speed>
+<bullet/>
+</fire>
+<vanish/>
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>
+
